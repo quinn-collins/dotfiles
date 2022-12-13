@@ -52,3 +52,13 @@ dotfiles checkout
 dotfiles config --local status.showUntrackedFiles no
 dotfiles config --local core.excludesFile=.dotfilesignore
 ```
+
+Add a vim plugin as a git subtree
+```
+dotfiles subtree add --prefix .vim/pack/all/start/tpope-vim-surround https://tpope.io/vim/surround.git master --squash
+```
+
+Update vim plugin
+```
+dotfiles subtree pull --prefix .vim/pack/all/start/tpope-vim-surround https://tpope.io/vim/surround.git master --squash
+```
