@@ -11,7 +11,7 @@ echo ".dotfiles" >> .dotfilesignore
 ```
 
 ```
-git clone --bar --recurse-submodules git@github.com:quinn-collins/dotfiles.git $HOME/.dotfiles
+git clone --bare --recurse-submodules git@github.com:quinn-collins/dotfiles.git $HOME/.dotfiles
 ```
 
 ```
