@@ -7,25 +7,20 @@ Installation
 
 Method 1
 ```
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+```
+```
 echo ".dotfiles" >> .dotfilesignore
 ```
-
 ```
 git clone --bare --recurse-submodules git@github.com:quinn-collins/dotfiles.git $HOME/.dotfiles
 ```
-
 ```
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+dotfiles checkout
 ```
-
-```
-dotfiles checkout master
-```
-
 ```
 dotfiles config --local status.showUntrackedFiles no
 ```
-
 ```
 dotfiles config --local  core.excludesFile=.dotfilesignore
 ```
