@@ -1,16 +1,17 @@
 # dotfiles
 
-Install
+Install these first
 ```
-apt install curl
-apt install zsh
+apt update && apt install git curl zsh vim -y
+```
+```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 https://github.com/jesuswasrasta/dotfiles
 https://www.atlassian.com/git/tutorials/dotfiles
 
-Installation
+Set up and pull down git repo
 
 Method 1
 ```
@@ -20,7 +21,7 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 echo ".dotfiles" >> .dotfilesignore
 ```
 ```
-git clone --bare --recurse-submodules git@github.com:quinn-collins/dotfiles.git $HOME/.dotfiles
+git clone --bare --recurse-submodules https://github.com/quinn-collins/dotfiles.git $HOME/.dotfiles
 ```
 ```
 dotfiles checkout
@@ -59,6 +60,8 @@ dotfiles checkout
 dotfiles config --local status.showUntrackedFiles no
 dotfiles config --local core.excludesFile=.dotfilesignore
 ```
+
+Use git subtree to manage vim plugins
 
 Add a vim plugin as a git subtree
 ```
