@@ -35,6 +35,7 @@ dotfiles config --local  core.excludesFile=.dotfilesignore
 
 Can remove existing files with this command:
 ```
+#!/bin/bash
 mkdir -p .dotfiles-backup && \
 dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
 xargs -I{} mv {} .dotfiles-backup/{}
@@ -44,6 +45,7 @@ Method 2
 
 Script:
 ```
+#!/bin/bash
 git clone --bare https://github.com/quinn-collins/dotfiles.git $HOME/.dotfiles
 function dotfiles {
    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
