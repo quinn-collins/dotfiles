@@ -39,7 +39,7 @@ let g:elite_mode=1
 
 set termguicolors
 set noshowmode
-colorscheme gruvbox
+colorscheme gruvbox8
 set background=dark
 let g:lightline = {
     \ 'colorscheme': 'seoul256',
