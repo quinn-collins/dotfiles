@@ -43,6 +43,11 @@ xargs -I{} mv {} .dotfiles-backup/{}
 
 Method 2
 
+Script below can be curled and passed to bash
+```
+curl -Lks https://raw.githubusercontent.com/quinn-collins/scripts/e7da0b917ddfdcf8f65560a6d244552ea8ad5d36/clone-checkout-dotfiles\?token\=GHSAT0AAAAAAB4LF7GMO6XOH22RWQGLU5CQY4Y4WOQ | /bin/bash
+```
+
 Script:
 ```
 #!/bin/bash
