@@ -1,5 +1,12 @@
 # dotfiles
 
+Install
+```
+apt install curl
+apt install zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
 https://github.com/jesuswasrasta/dotfiles
 https://www.atlassian.com/git/tutorials/dotfiles
 
