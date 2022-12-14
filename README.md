@@ -2,7 +2,7 @@
 
 Install these first
 ```
-apt update && apt install git curl zsh vim -y
+apt update && apt install git curl zsh vim fzf -y
 ```
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -45,7 +45,7 @@ Method 2
 
 Script below can be curled and passed to bash
 ```
-curl -Lks https://raw.githubusercontent.com/quinn-collins/scripts/e7da0b917ddfdcf8f65560a6d244552ea8ad5d36/clone-checkout-dotfiles\?token\=GHSAT0AAAAAAB4LF7GMO6XOH22RWQGLU5CQY4Y4WOQ | /bin/bash
+curl -Lks https://raw.githubusercontent.com/quinn-collins/scripts/main/clone-checkout-dotfiles | /bin/bash
 ```
 
 Script:
