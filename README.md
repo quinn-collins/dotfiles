@@ -5,6 +5,7 @@
 ## References
 
 https://github.com/jesuswasrasta/dotfiles
+
 https://www.atlassian.com/git/tutorials/dotfiles
 
 ## Cloning and Checking Out
@@ -49,7 +50,7 @@ dotfiles config --local  core.excludesFile=.dotfilesignore
 
 ### Method 2
 
-Within `.bin` folder there is a script called clone-checkout-dotfiles that can be downloaded with curl and then passed to `/bin/bash`
+Within `.bin` folder there is a script called `clone-checkout-dotfiles` that can be downloaded with `curl` and then passed to `/bin/bash`
 
 ```
 curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/clone-checkout-dotfiles | /bin/bash
