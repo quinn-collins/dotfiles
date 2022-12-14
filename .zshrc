@@ -106,6 +106,7 @@ function enter {
 
 ###########
 # Aliases #
+#
 ###########
 . ~/.zsh_aliases
 alias awsli='awsmfa --identity-profile interfolio --target-profile intf-cicd-mfa && awsmfa --identity-profile interfolio --target-profile interfolio-mfa'
@@ -130,10 +131,9 @@ bindkey "^[e" end-of-line
 # Source #
 ###########
 
+. /usr/share/doc/fzf/examples/key-bindings.zsh
 source $ZSH/oh-my-zsh.sh
-## Not sure what this used to do for me???
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
