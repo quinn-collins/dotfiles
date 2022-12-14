@@ -1,6 +1,16 @@
-# dotfiles
 
-Install these first
+# Dotfiles
+
+
+## References
+
+https://github.com/jesuswasrasta/dotfiles
+https://www.atlassian.com/git/tutorials/dotfiles
+
+## Cloning and Checking Out
+
+### Expected binaries
+
 ```
 apt update && apt install git curl zsh vim fzf -y
 ```
@@ -8,12 +18,8 @@ apt update && apt install git curl zsh vim fzf -y
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-https://github.com/jesuswasrasta/dotfiles
-https://www.atlassian.com/git/tutorials/dotfiles
+### Method 1
 
-Set up and pull down git repo
-
-Method 1
 ```
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 ```
@@ -26,6 +32,14 @@ git clone --bare --recurse-submodules https://github.com/quinn-collins/dotfiles.
 ```
 dotfiles checkout
 ```
+If checkout fails due to existing files, either delete them or run the following script that backs up the culprit files.
+```
+#!/bin/bash
+mkdir -p .dotfiles-backup && \
+dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
+xargs -I{} mv {} .dotfiles-backup/{}
+```
+If checkout failed, run it again after fixing errors. Then continue.
 ```
 dotfiles config --local status.showUntrackedFiles no
 ```
@@ -33,49 +47,25 @@ dotfiles config --local status.showUntrackedFiles no
 dotfiles config --local  core.excludesFile=.dotfilesignore
 ```
 
-Can remove existing files with this command:
+### Method 2
+
+Within `.bin` folder there is a script called clone-checkout-dotfiles that can be downloaded with curl and then passed to `/bin/bash`
+
 ```
-#!/bin/bash
-mkdir -p .dotfiles-backup && \
-dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
-xargs -I{} mv {} .dotfiles-backup/{}
+curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/clone-checkout-dotfiles | /bin/bash
 ```
 
-Method 2
+## Managing Vim Plugin With Git Subtree Examples
 
-Script below can be curled and passed to bash
-```
-curl -Lks https://raw.githubusercontent.com/quinn-collins/scripts/main/clone-checkout-dotfiles | /bin/bash
-```
-
-Script:
-```
-#!/bin/bash
-git clone --bare https://github.com/quinn-collins/dotfiles.git $HOME/.dotfiles
-function dotfiles {
-   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
-}
-mkdir -p .dotfiles-backup
-dotfiles checkout
-if [ $? = 0 ]; then
-  echo "Checked out dotfiles repository.";
-  else
-    echo "Backing up pre-existing dot files.";
-    dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
-fi;
-dotfiles checkout
-dotfiles config --local status.showUntrackedFiles no
-dotfiles config --local core.excludesFile=.dotfilesignore
-```
-
-Use git subtree to manage vim plugins
-
-Add a vim plugin as a git subtree
+Add
 ```
 dotfiles subtree add --prefix .vim/pack/all/start/tpope-vim-surround https://tpope.io/vim/surround.git master --squash
 ```
-
-Update vim plugin
+Update
 ```
 dotfiles subtree pull --prefix .vim/pack/all/start/tpope-vim-surround https://tpope.io/vim/surround.git master --squash
+```
+Delete
+```
+rm -rf .vim/pack/all/start/tpope-vim-surround
 ```
