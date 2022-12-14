@@ -7,7 +7,7 @@
 """""""""""""""""""""""""""""""""""
 " Basic
 set nocompatible
-set encoding=utf8
+set encoding=UTF-8
 set mouse=a
 set backspace=indent,eol,start
 set confirm
