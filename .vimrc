@@ -82,11 +82,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
 " fzf
-source /usr/share/doc/fzf/examples/fzf.vim
-" let g:fzf_action = {
-"   \ 'ctrl-t': 'tab split',
-"   \ 'ctrl-x': 'split',
-"   \ 'ctrl-s': 'vsplit' }
+set rtp+=/usr/local/opt/fzf " homebrew
+" source /usr/share/doc/fzf/examples/fzf.vim " apt
 """"""""""""""""""""""""""""""""""
 " Key Remaps
 """"""""""""""""""""""""""""""""""
