@@ -40,10 +40,18 @@ let g:elite_mode=1
 set termguicolors
 set noshowmode
 colorscheme nord
-set background=dark
 let g:lightline = {
-    \ 'colorscheme': 'seoul256',
-    \ }
+      \ 'colorscheme': 'nord',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 
 """"""""""""""""""""""""""""""""""
@@ -62,6 +70,15 @@ endif
 """"""""""""""""""""""""""""""""""
 
 " coc.nvim
+let g:coc_node_path = '$NVM_BIN/node'
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+"" Function for lightline
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
 
 "Polyglot
 let g:polyglot_disabled = ['markdown.plugin']

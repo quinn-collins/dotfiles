@@ -1,0 +1,11 @@
+{
+  "coc-json|global": {
+    "json-schema-cache": {
+      "https://json.schemastore.org/eslintrc.json": {
+        "etag": "\"80ffb6fd316ad81:0\"",
+        "fileName": "c5064f140d4cfdbf4d6fbe68f68abbb1.schema.json",
+        "updateTime": 1671134098473
+      }
+    }
+  }
+}
