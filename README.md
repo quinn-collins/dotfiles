@@ -70,3 +70,19 @@ Delete
 ```
 rm -rf .vim/pack/all/start/tpope-vim-surround
 ```
+
+## Setting up Coc.vim
+Install nvm, node, and npm
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+```
+```
+nvm install --lts
+```
+Install yarn and run install on coc.vim
+```
+npm install -g yarn
+```
+```
+cd ~/.vim/pack/all/start/coc.nvim && yarn install && cd -
+```
