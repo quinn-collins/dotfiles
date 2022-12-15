@@ -53,7 +53,7 @@ dotfiles config --local  core.excludesFile=.dotfilesignore
 Within `.bin` folder there is a script called `clone-checkout-dotfiles` that can be downloaded with `curl` and then passed to `/bin/bash`
 
 ```
-curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/clone-checkout-dotfiles | /bin/bash
+curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/.bin/clone-checkout-dotfiles | /bin/bash
 ```
 
 ## Managing Vim Plugin With Git Subtree Examples
@@ -69,4 +69,20 @@ dotfiles subtree pull --prefix .vim/pack/all/start/tpope-vim-surround https://tp
 Delete
 ```
 rm -rf .vim/pack/all/start/tpope-vim-surround
+```
+
+## Setting up Coc.vim
+Install nvm, node, and npm
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+```
+```
+nvm install --lts
+```
+Install yarn and run install on coc.vim
+```
+npm install -g yarn
+```
+```
+cd ~/.vim/pack/all/start/coc.nvim && yarn install && cd -
 ```
