@@ -39,7 +39,7 @@ let g:elite_mode=1
 
 set termguicolors
 set noshowmode
-colorscheme gruvbox8
+colorscheme nord
 set background=dark
 let g:lightline = {
     \ 'colorscheme': 'seoul256',
@@ -64,9 +64,10 @@ endif
 " Ale
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
+\   'javascript': ['prettier', 'eslint'],
 \}
 let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
 
 "Polyglot
 let g:polyglot_disabled = ['markdown.plugin']
