@@ -53,7 +53,7 @@ dotfiles config --local  core.excludesFile=.dotfilesignore
 Within `.bin` folder there is a script called `clone-checkout-dotfiles` that can be downloaded with `curl` and then passed to `/bin/bash`
 
 ```
-curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/clone-checkout-dotfiles | /bin/bash
+curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/.bin/clone-checkout-dotfiles | /bin/bash
 ```
 
 ## Managing Vim Plugin With Git Subtree Examples
