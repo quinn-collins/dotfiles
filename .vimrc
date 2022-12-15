@@ -61,13 +61,19 @@ endif
 " Plugin Config
 """"""""""""""""""""""""""""""""""
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('sources', {
+\ '_': ['ale'],
+\})
+
 " Ale
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier', 'eslint'],
 \}
 let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
+
 
 "Polyglot
 let g:polyglot_disabled = ['markdown.plugin']
