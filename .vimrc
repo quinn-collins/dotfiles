@@ -1,6 +1,21 @@
 """""""""""""""""""""""""""""""""""
 " Quinn Collins Vimrc configuration
 """""""""""""""""""""""""""""""""""
+" commands I want to remember
+" 
+" coc.nvim
+" :CocCommand
+" :CocList commands
+" :CocDiagnostics
+" :CocConfig
+"
+" emmet-vim
+" html:5 ,,
+" div>p#foo$83>a ,,
+" visual select ,, for tag prompt
+"
+" surround.vim
+" cs"' cs'<q> ds" 
 
 """""""""""""""""""""""""""""""""""
 " Configuration Section
@@ -111,6 +126,9 @@ endfunction
 
 " Symbol renaming
 nmap <leader>rn <Plug>(coc-rename)
+
+"" Emmet vim
+let g:user_emmet_leader_key=','
 
 "" Function for lightline
 function! CocCurrentFunction()
