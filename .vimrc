@@ -22,7 +22,6 @@
 """""""""""""""""""""""""""""""""""
 let mapleader = " "
 " Basic
-set nocompatible
 set encoding=UTF-8
 set mouse=a
 set backspace=indent,eol,start
