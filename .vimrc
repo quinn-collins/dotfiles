@@ -126,9 +126,6 @@ endfunction
 " Symbol renaming
 nmap <leader>rn <Plug>(coc-rename)
 
-"" Emmet vim
-let g:user_emmet_leader_key=','
-
 "" Function for lightline
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
