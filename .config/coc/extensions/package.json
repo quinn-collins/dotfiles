@@ -1,10 +1,5 @@
 {
   "dependencies": {
-    "coc-tsserver": ">=2.1.0",
-    "coc-json": ">=1.8.0",
-    "coc-css": ">=2.0.0",
-    "coc-html": ">=1.8.0",
-    "coc-eslint": ">=1.5.8",
     "coc-vetur": ">=1.2.5"
   }
 }
