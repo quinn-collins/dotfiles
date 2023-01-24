@@ -126,9 +126,6 @@ endfunction
 " Symbol renaming
 nmap <leader>rn <Plug>(coc-rename)
 
-"" Emmet vim
-let g:user_emmet_leader_key=','
-
 "" Function for lightline
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
@@ -148,8 +145,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
 " fzf
-set rtp+=/usr/local/opt/fzf " homebrew
-" source /usr/share/doc/fzf/examples/fzf.vim " apt
+" set rtp+=/usr/local/opt/fzf " homebrew
+source /usr/share/doc/fzf/examples/fzf.vim " apt
 """"""""""""""""""""""""""""""""""
 " Key Remaps
 """"""""""""""""""""""""""""""""""
@@ -171,6 +168,10 @@ nnoremap <C-j> <esc>:m .+1<cr>==
 nnoremap <C-k> <esc>:m .-2<cr>==
 inoremap <C-j> <esc>:m .+1<cr>==gi
 inoremap <C-k> <esc>:m .-2<cr>==gi
+inoremap { {}<Left>
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {{ {
+inoremap {} {}
 
 " NERDTree
 nnoremap <leader>n :NERDTreeFocus<CR>
