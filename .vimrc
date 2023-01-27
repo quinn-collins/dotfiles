@@ -72,7 +72,7 @@ endif
 " coc.nvim
 let g:coc_global_extensions = [
       \  'coc-json',
-      \'coc-git',
+      \  'coc-git',
       \  'coc-css',
       \  'coc-docker',
       \  'coc-emmet',
@@ -87,6 +87,12 @@ let g:coc_global_extensions = [
       \  'coc-xml',
       \  'coc-yaml'
       \]
+
+"Auto missing imports on save for go files gopls coc-go
+autocmd BufWritePre *.go silent! call CocAction('organizeImport')
+nnoremap <leader>Tf :CocCommand go.test.generate.file<cr>
+nnoremap <leader>T :CocCommand go.test.generate.function<cr>
+nnoremap <leader>t :CocCommand go.test.toggle<cr>
 
 " Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
