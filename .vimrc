@@ -1,21 +1,6 @@
 """""""""""""""""""""""""""""""""""
 " Quinn Collins Vimrc configuration
 """""""""""""""""""""""""""""""""""
-" commands I want to remember
-" 
-" coc.nvim
-" :CocCommand
-" :CocList commands
-" :CocDiagnostics
-" :CocConfig
-"
-" emmet-vim
-" html:5 ,,
-" div>p#foo$83>a ,,
-" visual select ,, for tag prompt
-"
-" surround.vim
-" cs"' cs'<q> ds" 
 
 """""""""""""""""""""""""""""""""""
 " Configuration Section
@@ -85,6 +70,24 @@ endif
 """"""""""""""""""""""""""""""""""
 
 " coc.nvim
+let g:coc_global_extensions = [
+      \  'coc-json',
+      \'coc-git',
+      \  'coc-css',
+      \  'coc-docker',
+      \  'coc-emmet',
+      \  'coc-eslint',
+      \  'coc-go',
+      \  'coc-golines',
+      \  'coc-html',
+      \  'coc-html-css-support',
+      \  'coc-markdownlint',
+      \  'coc-prettier',
+      \  'coc-tsserver',
+      \  'coc-xml',
+      \  'coc-yaml'
+      \]
+
 " Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
 " no select by `"suggest.noselect": true` in your configuration file
@@ -145,8 +148,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
 " fzf
-" set rtp+=/usr/local/opt/fzf " homebrew
-source /usr/share/doc/fzf/examples/fzf.vim " apt
+set rtp+=/usr/local/opt/fzf " homebrew
+" source /usr/share/doc/fzf/examples/fzf.vim " apt
 """"""""""""""""""""""""""""""""""
 " Key Remaps
 """"""""""""""""""""""""""""""""""

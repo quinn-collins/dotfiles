@@ -86,3 +86,5 @@ npm install -g yarn
 ```
 cd ~/.vim/pack/all/start/coc.nvim && yarn install && cd -
 ```
+Install coc.vim extensions
+curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/.bin/install-coc-extensions | /bin/bash
