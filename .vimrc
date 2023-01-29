@@ -85,7 +85,8 @@ let g:coc_global_extensions = [
       \  'coc-prettier',
       \  'coc-tsserver',
       \  'coc-xml',
-      \  'coc-yaml'
+      \  'coc-yaml',
+      \  'coc-snippets'
       \]
 
 "Auto missing imports on save for go files gopls coc-go
