@@ -135,7 +135,5 @@ bindkey "^[e" end-of-line
 source $ZSH/oh-my-zsh.sh
 
 export NVM_DIR="$HOME/.nvm"
-export GVM_DIR="$HOME/.gvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-[[ -s "$GVM_DIR/scripts/gvm" ]] && source "$GVM_DIR/scripts/gvm"
