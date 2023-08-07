@@ -19,7 +19,7 @@ ZSH_DISABLE_COMPFIX=true
 #########################
 
 typeset -U PATH path
-export PATH="$HOME/dev/scripts:$PATH"
+export PATH="$HOME/go/bin:/usr/local/mysql/bin:/usr/local/go/bin:$HOME/dev/scripts:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
 export NODE_PATH="/usr/local/lib/node_modules"
 export FZF_BASE="/usr/bin/fzf"
