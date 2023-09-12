@@ -8,9 +8,11 @@
 let mapleader = " "
 " Basic
 set encoding=UTF-8
-set mouse=a
+set mouse=n
 set backspace=indent,eol,start
 set confirm
+set foldmethod=indent
+set nofoldenable
 filetype indent plugin on
 
 " Indentation
@@ -25,6 +27,7 @@ set cursorline
 set nowrap
 set ruler
 set number
+set hlsearch
 
 " Search
 set ignorecase
@@ -116,6 +119,11 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
 " GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -140,6 +148,20 @@ nmap <leader>rn <Plug>(coc-rename)
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
+
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Remap keys for applying refactor code actions
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
+" Run the Code Lens action on the current line
+nmap <leader>cl  <Plug>(coc-codelens-action)
 
 "Polyglot
 let g:polyglot_disabled = ['markdown.plugin']
@@ -182,6 +204,9 @@ inoremap { {}<Left>
 inoremap {<CR> {<CR>}<Esc>O
 inoremap {{ {
 inoremap {} {}
+" Press Space to turn off highlighting and clear any message already displayed.
+:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
 
 " NERDTree
 nnoremap <leader>n :NERDTreeFocus<CR>

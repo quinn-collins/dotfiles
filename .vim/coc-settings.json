@@ -1,6 +1,15 @@
 {
   "go.goplsArgs": [],
+  "go.goplsEnv": {
+    "GOFLAGS": "-tags=integration"
+  },
   "go.goplsOptions": {
+    "autoFixOnSave": {
+      "fillstruct": true
+    },
+    "analyses": {
+      "fillstruct": true
+    },
     "gofumpt": true,
     "usePlaceholders": true,
     "staticcheck": true,

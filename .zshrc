@@ -110,13 +110,18 @@ function enter {
 ###########
 . ~/.zsh_aliases
 alias awsli='awsmfa --identity-profile interfolio --target-profile intf-cicd-mfa && awsmfa --identity-profile interfolio --target-profile interfolio-mfa'
-alias tusers='vim ~/dev/workspaces/xena/src/common/data/users.js'
-alias remember='vim ~/remember'
 alias notes='vim ~/notes'
 alias e2e='cd ~/dev/workspaces/e2e-test'
 alias xena='cd ~/dev/workspaces/xena'
-alias hist='history | grep'
+alias user='cd ~/dev/workspaces/user-api'
+alias unit='cd ~/dev/workspaces/unit-api'
+alias intf='cd ~/dev/workspaces/intf-docker-library'
 alias searchHere='grep . --exclude-dir \"node_modules\" --exclude-dir \".git\" --color -rnie'
+alias drop-unit-schema='docker exec -it postgres-14 psql -U postgres -d unit_api_test -c "DROP SCHEMA public CASCADE;" \
+                      && docker exec -it postgres-14 psql -U postgres -d unit_api_test -c "CREATE SCHEMA public"       \
+                      && docker exec -it unit-api go run main.go migrate up -d unit_api_test'
+alias seed-user='docker exec -it postgres-14 psql -U postgres -d user_api_development -a -f /user-testdata/seed.sql'
+alias seed-unit='docker exec -it postgres-14 psql -U postgres -d unit_api_development -a -f /unit-testdata/seed.sql'
 
 ################
 # Key bindings #
