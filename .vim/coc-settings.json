@@ -1,4 +1,6 @@
 {
+  "codeLens.enable": true,
+  "solargraph.useBundler": true,
   "go.goplsArgs": [],
   "go.goplsEnv": {
     "GOFLAGS": "-tags=integration"

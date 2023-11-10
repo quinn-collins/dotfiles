@@ -122,6 +122,7 @@ alias drop-unit-schema='docker exec -it postgres-14 psql -U postgres -d unit_api
                       && docker exec -it unit-api go run main.go migrate up -d unit_api_test'
 alias seed-user='docker exec -it postgres-14 psql -U postgres -d user_api_development -a -f /user-testdata/seed.sql'
 alias seed-unit='docker exec -it postgres-14 psql -U postgres -d unit_api_development -a -f /unit-testdata/seed.sql'
+alias dps='docker ps --format "table {{.Names}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}\t{{.ID}}"'
 
 ################
 # Key bindings #
@@ -142,3 +143,5 @@ source $ZSH/oh-my-zsh.sh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
+export GREENLIGHT_DB_DSN='postgres://greenlight:pa55word@localhost/greenlight?sslmode=disable'
