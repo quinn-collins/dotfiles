@@ -115,7 +115,7 @@ alias e2e='cd ~/dev/workspaces/e2e-test'
 alias xena='cd ~/dev/workspaces/xena'
 alias user='cd ~/dev/workspaces/user-api'
 alias unit='cd ~/dev/workspaces/unit-api'
-alias intf='cd ~/dev/workspaces/intf-docker-library'
+alias gdocker='cd ~/dev/workspaces/intf-docker-library'
 alias searchHere='grep . --exclude-dir \"node_modules\" --exclude-dir \".git\" --color -rnie'
 alias drop-unit-schema='docker exec -it postgres-14 psql -U postgres -d unit_api_test -c "DROP SCHEMA public CASCADE;" \
                       && docker exec -it postgres-14 psql -U postgres -d unit_api_test -c "CREATE SCHEMA public"       \
@@ -137,7 +137,7 @@ bindkey "^[e" end-of-line
 # Source #
 ###########
 
-. /usr/share/doc/fzf/examples/key-bindings.zsh
+# . /usr/share/doc/fzf/examples/key-bindings.zsh
 source $ZSH/oh-my-zsh.sh
 
 export NVM_DIR="$HOME/.nvm"
@@ -145,3 +145,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
 export GREENLIGHT_DB_DSN='postgres://greenlight:pa55word@localhost/greenlight?sslmode=disable'
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

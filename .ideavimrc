@@ -21,6 +21,7 @@ set incsearch
 set nu
 
 """ Idea specific settings ------------------
+
 set ideajoin
 set ideastatusicon=gray
 set idearefactormode=keep
@@ -41,10 +42,35 @@ map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
 map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>o <Action>(FileStructurePopup)
 
-""" Changes
+
+nmap <leader>ww <C-w><C-x>
+set hlsearch
+nnoremap <Leader><space> :noh<CR>
 imap jk <Esc>
 nmap ]e <Action>(GotoNextError)
 nmap [e <Action>(GotoPreviousError)
 nmap ]g <Action>(VcsShowNextChangeMarker)
 nmap [g <Action>(VcsShowPrevChangeMarker)
-nmap <leader>t <Action>(ActivateTerminalToolWindow)
+nmap <c-l><c-l> :set invrelativenumber<CR>
+
+nmap <c-\> <Action>(MoveTabRight)<CR>
+nmap <c--> <Action>(MoveTabDown)<CR>
+nmap <c-m> <Action>(MoveEditorToOppositeTabGroup)<CR>
+
+sethandler <c-j> a:vim
+sethandler <c-k> a:vim
+nnoremap <leader>wh <c-w>h
+nnoremap <leader>wl <c-w>l
+nnoremap <leader>wj <c-w>j
+nnoremap <leader>wk <c-w>k
+
+" terryma/vim-multiple-cursors
+let g:multi_cursor_use_default_mapping = 0
+let g:multi_cursor_start_word_key      = 'mc'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = 'mc'
+let g:multi_cursor_prev_key            = 'mp'
+let g:multi_cursor_skip_key            = 'mx'
+let g:multi_cursor_quit_key            = '<Esc>'
