@@ -25,7 +25,7 @@ function! s:checkVersion() abort
     else
       if !has('nvim-0.5.0') && !has('patch-8.2.0750')
         echohl WarningMsg
-        echom "coc.nvim works best on vim >= 8.2.0750 and neovim >= 0.5.0, consider upgrade your vim."
+        echom "coc.nvim works best on vim >= 8.2.0750 and neovim >= 0.5.0, consider upgrading vim."
         echom "You can add this to your vimrc to avoid this message:"
         echom "    let g:coc_disable_startup_warning = 1"
         echom "Note that some features may behave incorrectly."
@@ -99,8 +99,9 @@ function! CocAction(name, ...) abort
   return coc#rpc#request(a:name, a:000)
 endfunction
 
-function! CocHasProvider(name) abort
-  return coc#rpc#request('hasProvider', [a:name])
+function! CocHasProvider(name, ...) abort
+  let bufnr = empty(a:000) ? bufnr('%') : a:1
+  return coc#rpc#request('hasProvider', [a:name, bufnr])
 endfunction
 
 function! CocActionAsync(name, ...) abort
@@ -265,10 +266,8 @@ function! s:Disable() abort
   if get(g:, 'coc_enabled', 0) == 0
     return
   endif
-  augroup coc_nvim
-    autocmd!
-  augroup end
-  call coc#rpc#request('detach', [])
+  autocmd! coc_nvim
+  call coc#rpc#notify('detach', [])
   echohl MoreMsg
     echom '[coc.nvim] Event disabled'
   echohl None
@@ -358,6 +357,7 @@ function! s:Enable(initialize)
   if get(g:, 'coc_enabled', 0) == 1
     return
   endif
+
   let g:coc_enabled = 1
   sign define CocCurrentLine linehl=CocMenuSel
   sign define CocListCurrent linehl=CocListLine
@@ -441,7 +441,7 @@ function! s:Enable(initialize)
   endif
 endfunction
 
-function! s:Highlight() abort
+function! s:StaticHighlight() abort
   hi default CocSelectedText  ctermfg=Red     guifg=#fb4934 guibg=NONE
   hi default CocCodeLens      ctermfg=Gray    guifg=#999999 guibg=NONE
   hi default CocUnderline     term=underline cterm=underline gui=underline guisp=#ebdbb2
@@ -452,27 +452,6 @@ function! s:Highlight() abort
   hi default CocDisabled      guifg=#999999   ctermfg=gray
   hi default CocSearch        ctermfg=Blue    guifg=#15aabf guibg=NONE
   hi default CocLink          term=underline cterm=underline gui=underline guisp=#15aabf
-  if coc#highlight#get_contrast('Normal', has('nvim') ? 'NormalFloat' : 'Pmenu') > 2.0
-    exe 'hi default CocFloating '.coc#highlight#create_bg_command('Normal', &background ==# 'dark' ? -30 : 30)
-    exe 'hi default CocMenuSel '.coc#highlight#create_bg_command('CocFloating', &background ==# 'dark' ? -20 : 20)
-    exe 'hi default CocFloatThumb '.coc#highlight#create_bg_command('CocFloating', &background ==# 'dark' ? -40 : 40)
-    hi default link CocFloatSbar CocFloating
-  else
-    exe 'hi default link CocFloating '.(has('nvim') ? 'NormalFloat' : 'Pmenu')
-    if coc#highlight#get_contrast('CocFloating', 'PmenuSel') > 2.0
-      exe 'hi default CocMenuSel '.coc#highlight#create_bg_command('CocFloating', &background ==# 'dark' ? -30 : 30)
-    else
-      exe 'hi default CocMenuSel '.coc#highlight#get_hl_command(synIDtrans(hlID('PmenuSel')), 'bg', '237', '#13354A')
-    endif
-    hi default link CocFloatThumb        PmenuThumb
-    hi default link CocFloatSbar         PmenuSbar
-  endif
-  if coc#highlight#get_contrast('Normal', 'CursorLine') < 1.3
-    " Avoid color too close
-    exe 'hi default CocListLine '.coc#highlight#create_bg_command('Normal', &background ==# 'dark' ? -20 : 20)
-  else
-    hi default link CocListLine            CursorLine
-  endif
   hi default link CocFloatActive         CocSearch
   hi default link CocFadeOut             Conceal
   hi default link CocMarkdownCode        markdownCode
@@ -514,6 +493,33 @@ function! s:Highlight() abort
   hi default link CocPumVirtualText        CocVirtualText
   hi default link CocInputBoxVirtualText   CocVirtualText
   hi default link CocFloatDividingLine     CocVirtualText
+endfunction
+
+call s:StaticHighlight()
+call s:AddAnsiGroups()
+
+function! s:Highlight() abort
+  if coc#highlight#get_contrast('Normal', has('nvim') ? 'NormalFloat' : 'Pmenu') > 2.0
+    exe 'hi default CocFloating '.coc#highlight#create_bg_command('Normal', &background ==# 'dark' ? -30 : 30)
+    exe 'hi default CocMenuSel '.coc#highlight#create_bg_command('CocFloating', &background ==# 'dark' ? -20 : 20)
+    exe 'hi default CocFloatThumb '.coc#highlight#create_bg_command('CocFloating', &background ==# 'dark' ? -40 : 40)
+    hi default link CocFloatSbar CocFloating
+  else
+    exe 'hi default link CocFloating '.(has('nvim') ? 'NormalFloat' : 'Pmenu')
+    if coc#highlight#get_contrast('CocFloating', 'PmenuSel') > 2.0
+      exe 'hi default CocMenuSel '.coc#highlight#create_bg_command('CocFloating', &background ==# 'dark' ? -30 : 30)
+    else
+      exe 'hi default CocMenuSel '.coc#highlight#get_hl_command(synIDtrans(hlID('PmenuSel')), 'bg', '237', '#13354A')
+    endif
+    hi default link CocFloatThumb        PmenuThumb
+    hi default link CocFloatSbar         PmenuSbar
+  endif
+  if coc#highlight#get_contrast('Normal', 'CursorLine') < 1.3
+    " Avoid color too close
+    exe 'hi default CocListLine '.coc#highlight#create_bg_command('Normal', &background ==# 'dark' ? -20 : 20)
+  else
+    hi default link CocListLine            CursorLine
+  endif
 
   if has('nvim-0.5.0')
     hi default CocCursorTransparent gui=strikethrough blend=100
@@ -554,35 +560,33 @@ function! s:Highlight() abort
     exe 'hi default link CocInlayHint'.name.' CocInlayHint'
   endfor
 
-  call s:AddAnsiGroups()
-
   if get(g:, 'coc_default_semantic_highlight_groups', 1)
     let hlMap = {
-        \ 'Namespace': ['@namespace', 'Include'],
-        \ 'Type': ['@type', 'Type'],
-        \ 'Class': ['@constructor', 'Special'],
-        \ 'Enum': ['@type', 'Type'],
-        \ 'Interface': ['@type', 'Type'],
-        \ 'Struct': ['@structure', 'Identifier'],
-        \ 'TypeParameter': ['@parameter', 'Identifier'],
-        \ 'Parameter': ['@parameter', 'Identifier'],
-        \ 'Variable': ['@variable', 'Identifier'],
-        \ 'Property': ['@property', 'Identifier'],
-        \ 'EnumMember': ['@property', 'Constant'],
-        \ 'Event': ['@keyword', 'Keyword'],
-        \ 'Function': ['@function', 'Function'],
-        \ 'Method': ['@method', 'Function'],
-        \ 'Macro': ['@constant.macro', 'Define'],
-        \ 'Keyword': ['@keyword', 'Keyword'],
-        \ 'Modifier': ['@storageclass', 'StorageClass'],
-        \ 'Comment': ['@comment', 'Comment'],
-        \ 'String': ['@string', 'String'],
-        \ 'Number': ['@number', 'Number'],
-        \ 'Boolean': ['@boolean', 'Boolean'],
-        \ 'Regexp': ['@string.regex', 'String'],
-        \ 'Operator': ['@operator', 'Operator'],
-        \ 'Decorator': ['@symbol', 'Identifier'],
-        \ 'Deprecated': ['@text.strike', 'CocDeprecatedHighlight']
+        \ 'TypeNamespace': ['@module', 'Include'],
+        \ 'TypeType': ['@type', 'Type'],
+        \ 'TypeClass': ['@constructor', 'Special'],
+        \ 'TypeEnum': ['@type', 'Type'],
+        \ 'TypeInterface': ['@type', 'Type'],
+        \ 'TypeStruct': ['@structure', 'Identifier'],
+        \ 'TypeTypeParameter': ['@variable.parameter', 'Identifier'],
+        \ 'TypeParameter': ['@variable.parameter', 'Identifier'],
+        \ 'TypeVariable': ['@variable', 'Identifier'],
+        \ 'TypeProperty': ['@property', 'Identifier'],
+        \ 'TypeEnumMember': ['@property', 'Constant'],
+        \ 'TypeEvent': ['@keyword', 'Keyword'],
+        \ 'TypeFunction': ['@function', 'Function'],
+        \ 'TypeMethod': ['@function.method', 'Function'],
+        \ 'TypeMacro': ['@constant.macro', 'Define'],
+        \ 'TypeKeyword': ['@keyword', 'Keyword'],
+        \ 'TypeModifier': ['@keyword.storage', 'StorageClass'],
+        \ 'TypeComment': ['@comment', 'Comment'],
+        \ 'TypeString': ['@string', 'String'],
+        \ 'TypeNumber': ['@number', 'Number'],
+        \ 'TypeBoolean': ['@boolean', 'Boolean'],
+        \ 'TypeRegexp': ['@string.regexp', 'String'],
+        \ 'TypeOperator': ['@operator', 'Operator'],
+        \ 'TypeDecorator': ['@string.special.symbol', 'Identifier'],
+        \ 'ModDeprecated': ['@markup.strikethrough', 'CocDeprecatedHighlight']
         \ }
     for [key, value] in items(hlMap)
       let ts = get(value, 0, '')
@@ -592,7 +596,7 @@ function! s:Highlight() abort
   endif
   let symbolMap = {
       \ 'Keyword': ['@keyword', 'Keyword'],
-      \ 'Namespace': ['@namespace', 'Include'],
+      \ 'Namespace': ['@module', 'Include'],
       \ 'Class': ['@constructor', 'Special'],
       \ 'Method': ['@method', 'Function'],
       \ 'Property': ['@property', 'Identifier'],
@@ -606,7 +610,7 @@ function! s:Highlight() abort
       \ 'File': ['@file', 'Statement'],
       \ 'Module': ['@module', 'Statement'],
       \ 'Package': ['@package', 'Statement'],
-      \ 'Field': ['@field', 'Identifier'],
+      \ 'Field': ['@variable.member', 'Identifier'],
       \ 'Constructor': ['@constructor', 'Special'],
       \ 'Enum': ['@type', 'CocSymbolDefault'],
       \ 'Interface': ['@type', 'CocSymbolDefault'],
@@ -624,7 +628,7 @@ function! s:Highlight() abort
       \ 'Struct': ['@structure', 'Keyword'],
       \ 'Event': ['@constant', 'Constant'],
       \ 'Operator': ['@operator', 'Operator'],
-      \ 'TypeParameter': ['@parameter', 'Identifier'],
+      \ 'TypeParameter': ['@variable.parameter', 'Identifier'],
       \ }
   for [key, value] in items(symbolMap)
     let hlGroup = coc#highlight#valid(value[0]) ? value[0] : get(value, 1, 'CocSymbolDefault')
@@ -646,8 +650,8 @@ function! s:ShowInfo()
     else
       let output = trim(system(node . ' --version'))
       let ms = matchlist(output, 'v\(\d\+\).\(\d\+\).\(\d\+\)')
-      if empty(ms) || str2nr(ms[1]) < 14 || (str2nr(ms[1]) == 14 && str2nr(ms[2]) < 14)
-        call add(lines, 'Error: Node version '.output.' < 14.14.0, please upgrade node.js')
+      if empty(ms) || str2nr(ms[1]) < 16 || (str2nr(ms[1]) == 16 && str2nr(ms[2]) < 18)
+        call add(lines, 'Error: Node version '.output.' < 16.18.0, please upgrade node.js')
       endif
     endif
     " check bundle
@@ -713,6 +717,12 @@ command! -nargs=0 -bar CocUpdateSync   :call coc#util#update_extensions()
 command! -nargs=* -bar -complete=custom,s:InstallOptions CocInstall   :call coc#util#install_extension([<f-args>])
 
 call s:Enable(1)
+augroup coc_dynamic_autocmd
+augroup END
+augroup coc_dynamic_content
+augroup END
+augroup coc_dynamic_option
+augroup END
 
 " Default key-mappings for completion
 if empty(mapcheck('<C-n>', 'i'))

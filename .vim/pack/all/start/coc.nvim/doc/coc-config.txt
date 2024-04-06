@@ -89,8 +89,8 @@ Colors~
 							*coc-config-colors*
 "colors.enable"						*coc-config-colors-enable*
 
-	Enable colors highlight feature, for termainal vim, 'termguicolors'
-	option should be enabled and the termainal support gui colors.
+	Enable colors highlight feature, for terminal vim, 'termguicolors'
+	option should be enabled and the terminal support gui colors.
 
 	Scope: `language-overridable`, default: `false`
 
@@ -442,6 +442,13 @@ DocumentHighlight~
 
 	Scope: `resource`, default: `-1`
 
+"documentHighlight.limit"				*coc-config-documentHighlight-limit*
+
+	Limit the highlights added by matchaddpos, too many positions could
+	cause vim slow.
+
+	Scope: `resource`, default: `100`
+
 "documentHighlight.timeout"				*coc-config-documentHighlight-timeout*
 
 	Timeout for document highlight, in milliseconds.
@@ -539,29 +546,11 @@ InlayHint~
 
 	Scope: `language-overridable`, default: `true`
 
-"inlayHint.parameterSeparator"				*coc-config-inlayHint-parameterSeparator*
-
-	Separator for parameter inlay hint, neovim only.
-
-	Scope: `language-overridable`, default: `""`
-
 "inlayHint.refreshOnInsertMode"				*coc-config-inlayHint-refreshOnInsertMode*
 
 	Refresh inlayHints on insert mode.
 
 	Scope: `language-overridable`, default: `false`
-
-"inlayHint.subSeparator"				*coc-config-inlayHint-subSeparator*
-
-	Separator for chained inlay hints, neovim only.
-
-	Scope: `language-overridable`, default: `" "`
-
-"inlayHint.typeSeparator"				*coc-config-inlayHint-typeSeparator*
-
-	Separator for type inlay hint, neovim only.
-
-	Scope: `language-overridable`, default: `""`
 
 ------------------------------------------------------------------------------
 Links~
@@ -1112,6 +1101,12 @@ Suggest~
 
 	Scope: `language-overridable`, default: `false`
 
+"suggest.chineseSegments"				*coc-config-suggest-chineseSegments*
+
+	Divide Chinese sentence into segments in around/buffer source.
+
+	Scope: `language-overridable`, default: `true`
+
 "suggest.asciiMatch"					*coc-config-suggest-asciiMatch*
 
 	Convert unicode characters to ascii for match.
@@ -1177,7 +1172,7 @@ Suggest~
 
 	Enable float window with documentation aside with popupmenu.
 
-	Scope: `language-overridable`, default: `true"`
+	Scope: `language-overridable`, default: `true`
 
 "suggest.enablePreselect"				*coc-config-suggest-enablePreselect*
 
@@ -1185,6 +1180,19 @@ Suggest~
 	false.
 
 	Scope: `application`, default: `true`
+
+"suggest.filterGraceful" 				*coc-config-suggest-filterGraceful*
+
+	Controls whether filtering and sorting suggestions accounts for small
+	typos.
+
+	Scope: `language-overridable`, default: `true`
+
+"suggest.filterOnBackspace" 				*coc-config-suggest-filterOnBackspace*
+
+	Filter complete items on backspace.
+
+	Scope: `language-overridable`, default: `true`
 
 "suggest.floatConfig"					*coc-config-suggest-floatConfig*
 
@@ -1299,6 +1307,13 @@ Suggest~
 
 	Scope: `language-overridable`, default: `false`
 
+"suggest.removeCurrentWord"				*coc-config-suggest-removeCurrentWord*
+
+	Remove word item (from around and buffer source) that is identical to
+	current input
+
+	Scope: `language-overridable`, default: `false`
+
 "suggest.reversePumAboveCursor"				*coc-config-suggest-reversePumAboveCursor*
 
 	Reverse order of complete items when pum shown above cursor.
@@ -1354,6 +1369,12 @@ Suggest~
 ------------------------------------------------------------------------------
 Tree~
 							*coc-config-tree*
+"tree.openedIcon"					*coc-config-tree-openedIcon*
+
+	Opened icon of tree view.
+
+	Scope: `application`, default: `"-"`
+
 "tree.closedIcon"					*coc-config-tree-closedIcon*
 
 	Closed icon of tree view.
@@ -1414,12 +1435,6 @@ Tree~
 	Trigger key to select/unselect item.
 
 	Scope: `application`, default: `"<space>"`
-
-"tree.openedIcon"					*coc-config-tree-openedIcon*
-
-	Opened icon of tree view.
-
-	Scope: `application`, default: `"-"`
 
 ------------------------------------------------------------------------------
 TypeHierarchy~
@@ -1511,10 +1526,17 @@ Preferences~
 
 "coc.preferences.currentFunctionSymbolAutoUpdate"	*coc-preferences-currentFunctionSymbolAutoUpdate*
 
-	Automatically update the value of b:coc_current_function on CursorHold
+	Automatically update the value of b:coc_current_function on CursorMove
 	event
 
 	Scope: `language-overridable`, default: `false`
+
+"coc.preferences.currentFunctionSymbolDebounceTime"	*coc-preferences-currentFunctionSymbolDebounceTime*
+
+	Set debounce timer for the update of b:coc_current_function on CursorMove
+	event
+
+	Scope: `application`, default: `300`
 
 "coc.preferences.enableLinkedEditing"			*coc-preferences-enableLinkedEditing*
 
@@ -1565,6 +1587,12 @@ Preferences~
 	Set to true to enable formatting on save.
 
 	Scope: `language-overridable`, default: `false`
+
+"coc.preferences.formatOnSaveTimeout"			*coc-preferences-formatOnSaveTimeout*
+
+	How long before the format command run on save will time out.
+
+	Scope: `language-overridable`, default: `200`
 
 "coc.preferences.formatOnType"				*coc-preferences-formatOnType*
 
@@ -1631,6 +1659,11 @@ Preferences~
 
 	Scope: `application`, default: `500`
 
+"coc.preferences.tagDefinitionTimeout" 			*coc-preferences-tagDefinitionTimeout*
+
+	The timeout of CocTagFunc.
+	Scope: `application`, default: `0`
+
 ------------------------------------------------------------------------------
 Float configuration~
 							*coc-config-float*
@@ -1668,6 +1701,9 @@ Languageserver~
 	- "filetypes": Supported filetypes, add * in array for all filetypes.
 	  Note: it's required for start the languageserver, please make sure
 	  your filetype is expected by `:CocCommand document.echoFiletype` command
+
+	- 'maxRestartCount': Maximum restart count when server closed in the
+	  last 3 minutes, default to `4`.
 
 	- "additionalSchemes": Additional URI schemes, default schemes
 	  including file & untitled.

@@ -4,6 +4,7 @@ let s:pum_bufnr = 0
 let s:pum_winid = -1
 let s:pum_index = -1
 let s:pum_size = 0
+" word of complete item inserted
 let s:inserted = 0
 let s:virtual_text = 0
 let s:virtual_text_ns = coc#highlight#create_namespace('pum-virtual')
@@ -12,6 +13,7 @@ let s:hide_pum = has('nvim-0.6.1') || has('patch-8.2.3389')
 let s:virtual_text_support = has('nvim-0.5.0') || has('patch-9.0.0067')
 " bufnr, &indentkeys
 let s:saved_indenetkeys = []
+let s:saved_textwidth = []
 let s:prop_id = 0
 let s:reversed = 0
 let s:check_hl_group = 0
@@ -63,7 +65,7 @@ function! coc#pum#close(...) abort
     endif
     call s:close_pum()
     if !get(a:, 2, 0)
-      call coc#rpc#notify('CompleteStop', [kind])
+      call coc#rpc#request('CompleteStop', [kind])
     endif
   endif
   return ''
@@ -113,7 +115,7 @@ function! coc#pum#_insert() abort
     endif
     doautocmd <nomodeline> TextChangedI
     call s:close_pum()
-    call coc#rpc#notify('CompleteStop', [''])
+    call coc#rpc#request('CompleteStop', [''])
   endif
   return ''
 endfunction
@@ -265,6 +267,7 @@ function! coc#pum#_navigate(next, insert) abort
     call s:save_indentkeys()
     let index = s:get_index(a:next)
     call s:select_by_index(index, a:insert)
+    call coc#rpc#notify('PumNavigate', [])
   endif
   return ''
 endfunction
@@ -305,6 +308,12 @@ endfunction
 
 function! s:insert_word(word, finish) abort
   if s:start_col != -1 && mode() ==# 'i'
+    " avoid auto wrap using 'textwidth'
+    if !a:finish && &textwidth > 0
+      let textwidth = &textwidth
+      noa setl textwidth=0
+      call timer_start(0, { -> execute('noa setl textwidth='.textwidth)})
+    endif
     " should not be used on finish to have correct line.
     if s:is_vim && !a:finish
       call coc#pum#repalce(s:start_col + 1, a:word, 1)

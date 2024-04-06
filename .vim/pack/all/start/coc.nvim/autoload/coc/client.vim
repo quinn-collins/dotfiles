@@ -138,8 +138,8 @@ function! coc#client#check_version() abort
     let ms = matchlist(output, 'v\(\d\+\).\(\d\+\).\(\d\+\)')
     if empty(ms)
       let msgs = ['Unable to get node version by "'.cmd.'" please install NodeJS from https://nodejs.org/en/download/']
-    elseif str2nr(ms[1]) < 14 || (str2nr(ms[1]) == 14 && str2nr(ms[2]) < 14)
-      let msgs = ['Current Node.js version '.trim(output).' < 14.14.0 ', 'Please upgrade your .js']
+    elseif str2nr(ms[1]) < 16 || (str2nr(ms[1]) == 16 && str2nr(ms[2]) < 18)
+      let msgs = ['Current Node.js version '.trim(output).' < 16.18.0 ', 'Please upgrade your Node.js']
     endif
   endif
   if !empty(msgs)
@@ -156,7 +156,7 @@ function! s:on_exit(name, code) abort
   let client['chan_id'] = 0
   let client['channel'] = v:null
   let client['async_req_id'] = 1
-  if a:code != 0 && a:code != 143
+  if a:code != 0 && a:code != 143 && a:code != -1
     echohl Error | echom 'client '.a:name. ' abnormal exit with: '.a:code | echohl None
   endif
 endfunction

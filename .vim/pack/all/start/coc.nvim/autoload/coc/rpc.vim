@@ -141,7 +141,13 @@ function! coc#rpc#restart()
     call coc#highlight#clear_all()
     call coc#ui#sign_unplace()
     call coc#float#close_all()
+    autocmd! coc_dynamic_autocmd
+    autocmd! coc_dynamic_content
+    autocmd! coc_dynamic_option
     call coc#rpc#request('detach', [])
+    if !empty(get(g:, 'coc_status', ''))
+      unlet g:coc_status
+    endif
     let g:coc_service_initialized = 0
     sleep 100m
     if exists('$COC_NVIM_REMOTE_ADDRESS')
@@ -190,7 +196,7 @@ endfunction
 
 function! coc#rpc#request_async(method, args, cb) abort
   if !coc#rpc#ready()
-    return cb('coc.nvim service not started.')
+    return call(a:cb, ['coc.nvim service not started.'])
   endif
   call s:client['request_async'](a:method, a:args, a:cb)
 endfunction

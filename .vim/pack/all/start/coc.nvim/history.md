@@ -1,3 +1,87 @@
+# 2024-03-26
+
+- Added new `--workspace-folder` argument for diagnostics lists
+- Added new `--buffer` argument for diagnostics lists
+
+# 2024-02-28
+
+- Increase `g:coc_highlight_maximum_count` default to 200
+- Break change: semanticTokens highlight groups changed:
+  - `CocSem + type` to `CocSemType + type`
+  - `CocSem + modifier + type` to `CocSemTypeMod + type + modifier`
+
+# 2024-03-06
+
+- add `outline.autoHide` configuration to automatically hide the outline window when an item is clicked
+
+# 2024-02-27
+
+- Add `g:coc_disable_mappings_check` to disable key-mappings checking
+- Add `suggest.chineseSegments` configuration to control whether to divide Chinese sentences into segments or not
+
+# 2023-09-02
+
+- Support `g:coc_list_preview_filetype`.
+
+# 2023-08-31
+
+- Minimal node version changed from 14.14.0 to 16.18.0.
+- Inlay hint support requires neovim >= 0.10.0.
+- Removed configurations:
+  - `inlayHint.subSeparator`
+  - `inlayHint.typeSeparator`
+  - `inlayHint.parameterSeparator`
+
+# 2023-01-30
+
+- Always show `cancellable` progress as notification without check
+  `notification.statusLineProgress`.
+
+# 2023-01-29
+
+- Exclude `source` actions when request code actions with range.
+- Any character can be used for channel name.
+
+# 2023-01-26
+
+- Add escape support to `coc#status()`.
+
+# 2023-01-24
+
+- Add `encoding` and `CancellationToken` support for `runCommand` function.
+
+# 2023-01-23
+
+- Make `vscode.open` command work with file uri.
+- Cancel option for `workspace.registerExprKeymap()`.
+- Support `suggest.filterOnBackspace` configuration.
+
+# 2023-01-22
+
+- `maxRestartCount` configuration for configured language server.
+
+# 2022-12-25
+
+- Create symbol tree from SymbolInformation list.
+
+# 2022-12-23
+
+- Support `URI` as param for API `workspace.jumpTo()`.
+
+# 2022-12-22
+
+- Support popup window for window related APIs.
+
+# 2022-12-21
+
+- When create `CocSem` highlight group, replace invalid character of token types
+  and token modifiers with underline.
+
+# 2022-12-20
+
+- Export `Buffer.setKeymap` and `Buffer.deleteKeymap` with vim and neovim support.
+- Make `workspace.registerLocalKeymap` accept bufnr argument.
+
 # 2022-12-12
 
 - Allow configuration of `window` scoped used by folder configuration file, like
