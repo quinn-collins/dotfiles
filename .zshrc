@@ -113,6 +113,7 @@ function enter {
 ###########
 # Aliases #
 ###########
+alias vim='nvim'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dot=dotfiles
 alias awsli='awsmfa --identity-profile interfolio --target-profile intf-cicd-mfa && awsmfa --identity-profile interfolio --target-profile interfolio-mfa'
