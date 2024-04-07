@@ -113,7 +113,8 @@ function enter {
 ###########
 # Aliases #
 ###########
-. ~/.zsh_aliases
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dot=dotfiles
 alias awsli='awsmfa --identity-profile interfolio --target-profile intf-cicd-mfa && awsmfa --identity-profile interfolio --target-profile interfolio-mfa'
 alias notes='vim ~/notes'
 alias e2e='cd ~/dev/workspaces/e2e-test'
