@@ -145,7 +145,6 @@ bindkey "^[e" end-of-line
 
 # . /usr/share/doc/fzf/examples/key-bindings.zsh
 source $ZSH/oh-my-zsh.sh
-source $HOME/.zsh/.linux
 
 ############################
 # Platform Specific Config #
