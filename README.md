@@ -3,6 +3,7 @@
 ## References
 
 <https://www.atlassian.com/git/tutorials/dotfiles>
+
 <https://github.com/jesuswasrasta/dotfiles>
 
 ## Setup
@@ -20,7 +21,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ### Automated install
 
 ```bash
-curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/.bin/clone-checkout-dotfiles | /bin/bash
+curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/bin/clone-checkout-dotfiles | /bin/bash
 ```
 
 ### Manual install
@@ -92,32 +93,4 @@ Delete
 
 ```bash
 rm -rf .vim/pack/all/start/tpope-vim-surround
-```
-
-## Setting up Coc.vim
-
-Install nvm, node, and npm
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-```
-
-```bash
-nvm install --lts
-```
-
-Install yarn and run install on coc.vim
-
-```bash
-npm install -g yarn
-```
-
-```bash
-cd ~/.vim/pack/all/start/coc.nvim && yarn install && cd -
-```
-
-Install coc.vim extensions
-
-```bash
-curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/.bin/install-coc-extensions | /bin/bash
 ```
