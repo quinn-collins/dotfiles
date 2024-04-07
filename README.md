@@ -1,90 +1,123 @@
-
 # Dotfiles
-
 
 ## References
 
-https://github.com/jesuswasrasta/dotfiles
+<https://www.atlassian.com/git/tutorials/dotfiles>
+<https://github.com/jesuswasrasta/dotfiles>
 
-https://www.atlassian.com/git/tutorials/dotfiles
-
-## Cloning and Checking Out
+## Setup
 
 ### Expected binaries
 
-```
+```bash
 apt update && apt install git curl zsh vim fzf -y
 ```
-```
+
+```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-### Method 1
+### Automated install
 
+```bash
+curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/.bin/clone-checkout-dotfiles | /bin/bash
 ```
+
+### Manual install
+
+```bash
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 ```
-```
+
+```bash
 echo ".dotfiles" >> .dotfilesignore
 ```
-```
+
+```bash
 git clone --bare --recurse-submodules https://github.com/quinn-collins/dotfiles.git $HOME/.dotfiles
 ```
-```
+
+```bash
 dotfiles checkout
 ```
+
 If checkout fails due to existing files, either delete them or run the following script that backs up the culprit files.
-```
+
+```bash
 #!/bin/bash
 mkdir -p .dotfiles-backup && \
 dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
 xargs -I{} mv {} .dotfiles-backup/{}
 ```
+
 If checkout failed, run it again after fixing errors. Then continue.
-```
+
+```bash
 dotfiles config --local status.showUntrackedFiles no
 ```
-```
+
+```bash
 dotfiles config --local  core.excludesFile=.dotfilesignore
 ```
 
-### Method 2
+### From scratch
 
-Within `.bin` folder there is a script called `clone-checkout-dotfiles` that can be downloaded with `curl` and then passed to `/bin/bash`
+If you aren't using this repository to track your dotfiles
 
-```
-curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/.bin/clone-checkout-dotfiles | /bin/bash
+```bash
+1) git init --bare $HOME/.dotfiles
+2) alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+3) dotfiles config --local status.showUntrackedFiles no
+4) dotfiles config --local core.excludesFile=.dotfilesignore
+5) echo ". ~/.zsh_aliases" >> $HOME/.zshrc
+6) echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.zsh_aliases
+7) echo "alias dfg=dotfiles" >> $HOME/.zsh_aliases
 ```
 
 ## Managing Vim Plugin With Git Subtree Examples
 
 Add
-```
+
+```bash
 dotfiles subtree add --prefix .vim/pack/all/start/tpope-vim-surround https://tpope.io/vim/surround.git master --squash
 ```
+
 Update
-```
+
+```bash
 dotfiles subtree pull --prefix .vim/pack/all/start/tpope-vim-surround https://tpope.io/vim/surround.git master --squash
 ```
+
 Delete
-```
+
+```bash
 rm -rf .vim/pack/all/start/tpope-vim-surround
 ```
 
 ## Setting up Coc.vim
+
 Install nvm, node, and npm
-```
+
+```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 ```
-```
+
+```bash
 nvm install --lts
 ```
+
 Install yarn and run install on coc.vim
-```
+
+```bash
 npm install -g yarn
 ```
-```
+
+```bash
 cd ~/.vim/pack/all/start/coc.nvim && yarn install && cd -
 ```
+
 Install coc.vim extensions
+
+```bash
 curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/.bin/install-coc-extensions | /bin/bash
+```
