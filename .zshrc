@@ -19,10 +19,16 @@ ZSH_DISABLE_COMPFIX=true
 #########################
 
 typeset -U PATH path
-export PATH="$HOME/go/bin:/usr/local/mysql/bin:/usr/local/go/bin:$HOME/dev/scripts:$PATH"
+
+export GOINSTALL=/usr/local/go/bin
+export GOPATH=$HOME/go
+export NVIMINSTALL=/opt/nvim-linux64/bin
+export FZF_BASE=/usr/bin/fzf
+export RVMINSTALL=$HOME/.rvm/bin
 export ZSH="$HOME/.oh-my-zsh"
-export NODE_PATH="/usr/local/lib/node_modules"
-export FZF_BASE="/usr/bin/fzf"
+
+
+export PATH=$PATH:$GOINSTALL:$GOPATH/bin:$NVIMINSTALL:$RVMINSTALL
 
 ###########
 # Plugins #
@@ -106,7 +112,6 @@ function enter {
 
 ###########
 # Aliases #
-#
 ###########
 . ~/.zsh_aliases
 alias awsli='awsmfa --identity-profile interfolio --target-profile intf-cicd-mfa && awsmfa --identity-profile interfolio --target-profile interfolio-mfa'
@@ -133,18 +138,30 @@ bindkey "[C" forward-word
 bindkey "^[a" beginning-of-line
 bindkey "^[e" end-of-line
 
-###########
+##########
 # Source #
-###########
+##########
 
 # . /usr/share/doc/fzf/examples/key-bindings.zsh
 source $ZSH/oh-my-zsh.sh
+source $HOME/.zsh/.linux
+
+############################
+# Platform Specific Config #
+############################
+
+# Mac
+if [ "$(uname -s)" = "Darwin" ]; then
+
+fi
+
+# Linux
+if [ "$(uname -s)" = "Linux" ]; then
+
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
-export GREENLIGHT_DB_DSN='postgres://greenlight:pa55word@localhost/greenlight?sslmode=disable'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
