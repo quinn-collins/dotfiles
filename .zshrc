@@ -19,16 +19,18 @@ ZSH_DISABLE_COMPFIX=true
 #########################
 
 typeset -U PATH path
-
+export RVM=$HOME/.rvm/bin
+export BREWRUBY=/usr/local/opt/ruby/bin
 export GOINSTALL=/usr/local/go/bin
 export GOPATH=$HOME/go
 export NVIMINSTALL=/opt/nvim-linux64/bin
 export FZF_BASE=/usr/bin/fzf
 export RVMINSTALL=$HOME/.rvm/bin
 export ZSH="$HOME/.oh-my-zsh"
+eval "$(rbenv init - zsh)"
 
 
-export PATH=$PATH:$GOINSTALL:$GOPATH/bin:$NVIMINSTALL:$RVMINSTALL
+export PATH=$PATH:$GOINSTALL:$GOPATH/bin:$NVIMINSTALL:$RVMINSTALL:$BREWRUBY:$RVM
 
 ###########
 # Plugins #
