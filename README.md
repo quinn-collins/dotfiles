@@ -21,7 +21,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ### Automated install
 
 ```bash
-curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/bin/clone-checkout-dotfiles | /bin/bash
+curl -Lks https://raw.githubusercontent.com/quinn-collins/dotfiles/main/.local/bin/clone-checkout-dotfiles | /bin/bash
 ```
 
 ### Manual install
