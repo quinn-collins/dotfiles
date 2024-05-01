@@ -28,7 +28,6 @@ export NVIMINSTALL=/opt/nvim-linux64/bin
 export FZF_BASE=/usr/bin/fzf
 export RVMINSTALL=$HOME/.rvm/bin
 export ZSH="$HOME/.oh-my-zsh"
-eval "$(rbenv init - zsh)"
 
 
 export PATH=$PATH:$LOCALBIN:$GOINSTALL:$GOPATH/bin:$NVIMINSTALL:$RVMINSTALL:$BREWRUBY:$RVM
@@ -156,7 +155,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Mac
 if [ "$(uname -s)" = "Darwin" ]; then
-
+  eval "$(rbenv init - zsh)"
 fi
 
 # Linux
