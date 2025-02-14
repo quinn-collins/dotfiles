@@ -27,6 +27,8 @@ vim.opt.showmode = false
 
 vim.opt.clipboard = 'unnamedplus'
 
+vim.opt.foldmethod = 'indent'
+vim.opt.foldlevel = 99
 vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
@@ -128,6 +130,16 @@ require('lazy').setup({
     config = function()
       require('nvim-tree').setup {}
     end,
+  },
+  {
+    'declancm/cinnamon.nvim',
+    version = '*',
+    opts = {
+      keymaps = {
+        basic = true,
+        extra = true,
+      },
+    },
   },
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -430,6 +442,8 @@ require('lazy').setup({
         emmet_language_server = {},
         emmet_ls = {},
         gopls = {},
+        sqls = {},
+        ruby_ls = {},
         html = {
           filetypes = { 'html', 'tmpl', 'templ', 'gotmpl' },
         },
