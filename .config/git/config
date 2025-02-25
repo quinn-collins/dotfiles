@@ -1,0 +1,40 @@
+[branch]
+        sort = -committerdate
+[column]
+        ui = auto
+[commit]
+        verbose = true
+[core]
+        # fsmonitor = true
+        # untrackedCache = true
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+[help]
+        autocorrect = prompt
+[init]
+        defaultBranch = main
+[merge]
+        # (just 'diff3' if git version < 2.3)
+        # conflictstyle = zdiff3 
+[pull]
+        rebase = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+[rerere]
+        enabled = true
+        autoupdate = true
+[tag]
+        sort = version:refname
