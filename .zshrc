@@ -18,6 +18,9 @@ ZSH_DISABLE_COMPFIX=true
 # Environment variables #
 #########################
 
+# For things that won't get committed to source repository
+source ~/.zsh_env
+
 typeset -U PATH path
 export LOCALBIN=$HOME/.local/bin
 export RVM=$HOME/.rvm/bin
@@ -28,6 +31,9 @@ export NVIMINSTALL=/opt/nvim-linux64/bin
 export FZF_BASE=/usr/bin/fzf
 export RVMINSTALL=$HOME/.rvm/bin
 export ZSH="$HOME/.oh-my-zsh"
+
+export GREENLIGHT_DB_DSN='postgres://greenlight:pa55word@host.docker.internal/greenlight?sslmode=disable'
+export INVOICE_API_DB_DSN='postgres://invoice_api:pa55word@host.docker.internal/invoice_api?sslmode=disable'
 
 
 export PATH=$PATH:$LOCALBIN:$GOINSTALL:$GOPATH/bin:$NVIMINSTALL:$RVMINSTALL:$BREWRUBY:$RVM
@@ -115,22 +121,16 @@ function enter {
 ###########
 # Aliases #
 ###########
+
+# For things that won't get committed to source repository
+source ~/.zsh_aliases
+
 alias vim='nvim'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dot=dotfiles
 alias awsli='awsmfa --identity-profile interfolio --target-profile intf-cicd-mfa && awsmfa --identity-profile interfolio --target-profile interfolio-mfa'
-alias notes='vim ~/notes'
-alias e2e='cd ~/dev/workspaces/e2e-test'
-alias xena='cd ~/dev/workspaces/xena'
-alias user='cd ~/dev/workspaces/user-api'
-alias unit='cd ~/dev/workspaces/unit-api'
 alias gdocker='cd ~/dev/workspaces/intf-docker-library'
 alias searchHere='grep . --exclude-dir \"node_modules\" --exclude-dir \".git\" --color -rnie'
-alias drop-unit-schema='docker exec -it postgres-14 psql -U postgres -d unit_api_test -c "DROP SCHEMA public CASCADE;" \
-                      && docker exec -it postgres-14 psql -U postgres -d unit_api_test -c "CREATE SCHEMA public"       \
-                      && docker exec -it unit-api go run main.go migrate up -d unit_api_test'
-alias seed-user='docker exec -it postgres psql -U postgres -d user_api_development -a -f /user-testdata/seed.sql'
-alias seed-unit='docker exec -it postgres psql -U postgres -d unit_api_development -a -f /unit-testdata/seed.sql'
 alias dps='docker ps --format "table {{.Names}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}\t{{.ID}}"'
 
 ################

@@ -14,7 +14,7 @@
         renames = true
 [fetch]
         prune = true
-        pruneTags = true
+        # pruneTags = true
         all = true
 [help]
         autocorrect = prompt
