@@ -31,9 +31,18 @@
 [rebase]
         autoSquash = true
         autoStash = true
-        updateRefs = true
+        # updateRefs = true
 [rerere]
         enabled = true
         autoupdate = true
 [tag]
         sort = version:refname
+[user]
+	email = collinsqui@gmail.com
+	name = Quinn Collins
+[includeIf "gitdir:~/dev/workspaces/"]
+	path = ~/dev/workspaces/.work.gitconfig
+[includeIf "gitdir:~/dev/personal/"]
+	path = ~/dev/personal/.personal.gitconfig
+[url "git@github.com:"]
+	insteadOf = https://github.com/

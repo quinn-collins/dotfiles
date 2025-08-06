@@ -31,12 +31,14 @@ export NVIMINSTALL=/opt/nvim-linux64/bin
 export FZF_BASE=/usr/bin/fzf
 export RVMINSTALL=$HOME/.rvm/bin
 export ZSH="$HOME/.oh-my-zsh"
+export BIN="$HOME/bin"
+export CODEQL="$BIN/codeql"
 
 export GREENLIGHT_DB_DSN='postgres://greenlight:pa55word@host.docker.internal/greenlight?sslmode=disable'
 export INVOICE_API_DB_DSN='postgres://invoice_api:pa55word@host.docker.internal/invoice_api?sslmode=disable'
 
 
-export PATH=$PATH:$LOCALBIN:$GOINSTALL:$GOPATH/bin:$NVIMINSTALL:$RVMINSTALL:$BREWRUBY:$RVM
+export PATH=$PATH:$LOCALBIN:$GOINSTALL:$GOPATH/bin:$NVIMINSTALL:$RVMINSTALL:$BREWRUBY:$RVM:$BIN:$CODEQL
 
 ###########
 # Plugins #
