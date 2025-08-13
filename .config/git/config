@@ -38,11 +38,16 @@
 [tag]
         sort = version:refname
 [user]
-	email = collinsqui@gmail.com
-	name = Quinn Collins
+	email = quinn.collins@interfolio.com
+	name = quinncollins-interfolio
 [includeIf "gitdir:~/dev/workspaces/"]
 	path = ~/dev/workspaces/.work.gitconfig
 [includeIf "gitdir:~/dev/personal/"]
 	path = ~/dev/personal/.personal.gitconfig
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
