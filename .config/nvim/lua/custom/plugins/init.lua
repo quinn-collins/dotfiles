@@ -39,4 +39,20 @@ return {
   {
     'giuxtaposition/blink-cmp-copilot',
   },
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    dependencies = {
+      'zbirenbaum/copilot.lua',
+      'nvim-lua/plenary.nvim',
+    },
+    config = function()
+      require('CopilotChat').setup {
+        mapping = {
+          accept = '<C-y>', -- Change accept key to <C-y>
+        },
+      }
+      vim.keymap.set('n', '<leader>cc', '<cmd>CopilotChat<CR>', { desc = 'Toggle Copilot Chat' })
+    end,
+    event = 'VeryLazy',
+  },
 }

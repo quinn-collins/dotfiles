@@ -361,6 +361,19 @@ require('lazy').setup({
             },
           },
         },
+        ruff = {},
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = 'standard',
+                diagnosticMode = 'openFilesOnly',
+                useLibraryCodeForTypes = true,
+              },
+            },
+            python = {},
+          },
+        },
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
@@ -489,7 +502,7 @@ require('lazy').setup({
           copilot = {
             name = 'copilot',
             module = 'blink-cmp-copilot',
-            kind = 'Copilot',
+            -- kind = 'Copilot',
             score_offset = 100,
             async = true,
             -- transform_items = function(_, items)
