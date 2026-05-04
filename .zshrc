@@ -33,9 +33,10 @@ export RVMINSTALL=$HOME/.rvm/bin
 export ZSH="$HOME/.oh-my-zsh"
 export BIN="$HOME/bin"
 export CODEQL="$BIN/codeql"
+export TGENV="$HOME/.tgenv/bin:"
 
 
-export PATH=$PATH:$LOCALBIN:$GOINSTALL:$GOPATH/bin:$NVIMINSTALL:$RVMINSTALL:$BREWRUBY:$RVM:$BIN:$CODEQL:$PIPENV
+export PATH=$PATH:$LOCALBIN:$GOINSTALL:$GOPATH/bin:$NVIMINSTALL:$RVMINSTALL:$BREWRUBY:$RVM:$BIN:$CODEQL:$PIPENV:$TGENV
 
 ###########
 # Plugins #
